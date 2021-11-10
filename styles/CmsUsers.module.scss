@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap');
+
+
+.article {
+  margin-top: 80px;
+  margin-left: 220px; /* Same as the width of the sidenav */
+  font-size: 16px; /* Increased text to enable scrolling */
+  font-weight: bold;
+  font-family: 'Comfortaa', cursive;
+  padding: 0px 10px;
+}
+
+.users {
+  margin-top: 50px;
+}
+.tblUsers{
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  margin-left: 10px;
+}
+
+.column1 {
+  width: 40%;
+  padding: 18px;
+  background-color: #FBD3C4;
+}
+
+.column2 {
+  width: 20%;
+  padding: 18px;
+  background-color: #FBD3C4;
+}
+
+.column3 {
+  width: 20%;
+  padding: 18px;
+  background-color: #FBD3C4;
+}
+
+.column4 {
+  width: 20%;
+  padding: 18px;
+  margin-right: 5%;
+  background-color: #FBD3C4;
+}
+
+.button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnAction {
+  justify-content: space-between;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+// SCSS MODAL DETAIL 
+.mdlDetail{
+  position: absolute;
+  width: 838px;
+  height: 545px;
+  left: 277px;
+  top: 93px;
+}
