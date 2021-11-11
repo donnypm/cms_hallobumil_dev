@@ -10,10 +10,15 @@
   padding: 0px 10px;
 }
 
-.admin {
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.users {
   margin-top: 20px;
 }
-.tblAdmin{
+.tblUsers{
   margin: 0 auto;
   padding: 10px;
   display: flex;
@@ -68,8 +73,12 @@
   top: 93px;
 }
 
-//BUTTON CREATE & SEARCH >> jadinya di global biar ga bikin berkali2
-.header {
+//seacrh user
+.search {
   display: flex;
-  justify-content: space-between;
-}
+  margin-top: 10px;
+  border-radius: 50px;
+  ::placeholder {
+  color: rgb(0, 0, 0);
+  justify-content: center;
+}}
