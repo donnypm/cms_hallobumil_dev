@@ -22,6 +22,20 @@ const CmsUsers = () => {
       <section className={styles.article}>
         <h1 style={{ lineHeight: "10px", fontFamily: "comfortaa"}}> CMS User </h1>
 
+        <div className="search">
+          <form>
+            {" "}
+            <input name="Search"
+                   type="text"
+                   placeholder="Search CMS User..."
+                  //  onChange={}
+                  // value={}
+                   className="input-search"
+            />
+          </form>
+        </div>
+      </div>
+
       <section>
       <section className={styles.users}>
         <title>CMS Users</title>
