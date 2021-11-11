@@ -7,13 +7,52 @@ import {
   faLock,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { loginUser } from "../redux/actions/loginActions";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/dist/client/router";
+import Cookie from "js-cookie";
 
 const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
+  };
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const userData = useSelector((state) => state.isLogin);
+  const { errors } = userData;
+
+  const [isError, setIserror] = useState(false);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (Cookie.get("token")) {
+      userData.users && router.push("/CMSHome");
+    }
+  }, [userData]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      loginUser({
+        email: email,
+        password: password,
+        loggedIn: true,
+      })
+    );
+    setIserror(true);
+
+    router.push("/CMSHome");
+
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -34,16 +73,18 @@ const Login = () => {
                 style={{ height: "100px", width: "100px" }}
               />
             </div>
-            <form>
+            <form onSubmit={(e) => handleSubmit(e)}>
               <div className={styles.form__input}>
                 <span className={styles.icon}>
                   <FontAwesomeIcon icon={faUser} size="2x" />
                 </span>
                 <input
-                  type="text"
-                  name="username"
-                  placeholder="username"
+                  type="email"
+                  name="email"
+                  placeholder="email"
                   className={styles.inputBox}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <br />
@@ -56,6 +97,8 @@ const Login = () => {
                   name="password"
                   placeholder="password"
                   className={styles.inputBox}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <i className={styles.iconVisible}>
                   <FontAwesomeIcon
