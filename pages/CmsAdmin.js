@@ -40,6 +40,25 @@ const CmsAdmin = () => {
         </button>
       </AdminDetail> */}
 
+      <div className={styles.header}>
+        <button className="btnCreate">
+          New CMS Admin
+        </button>
+
+        <div className="search">
+          <form>
+            {" "}
+            <input name="Search"
+                   type="text"
+                   placeholder="Search CMS Admin..."
+                  //  onChange={}
+                  // value={}
+                   className="input-search"
+            />
+          </form>
+        </div>
+      </div>
+
       <section>
       <section className={styles.admin}>
         <title>CMS Admin</title>
