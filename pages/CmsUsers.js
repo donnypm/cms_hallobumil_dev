@@ -22,6 +22,11 @@ const CmsUsers = () => {
       <section className={styles.article}>
         <h1 style={{ lineHeight: "10px", fontFamily: "comfortaa"}}> CMS User </h1>
 
+        <div className={styles.header}>
+        <button className="btnCreate">
+          New CMS User
+        </button>
+
         <div className="search">
           <form>
             {" "}
