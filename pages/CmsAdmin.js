@@ -21,7 +21,7 @@ const CmsAdmin = () => {
     <>
       <Layout />
 
-      <section className={styles.article}>
+      <section className="article">
         <h1 style={{ lineHeight: "10px", fontFamily: "comfortaa" }}>
           CMS Admin
         </h1>
@@ -43,6 +43,22 @@ const CmsAdmin = () => {
         />
         </button>
       </AdminDetail> */}
+
+        <div className={styles.header}>
+          <button className="btnCreate">New CMS Admin</button>
+
+          <div className="search">
+            <form style={{ width: "500px" }}>
+              <input
+                type="text"
+                placeholder="Search CMS Admin..."
+                //  onChange={}
+                // value={}
+                className="input-search"
+              />
+            </form>
+          </div>
+        </div>
 
         <section className={styles.admin}>
           <title>CMS Admin</title>

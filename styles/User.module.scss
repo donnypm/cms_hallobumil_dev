@@ -46,12 +46,10 @@
 .formName {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
 }
 
 .form__input {
   position: relative;
-  display: flex;
   align-items: center;
   justify-content: center;
   margin: 10px;
@@ -68,11 +66,10 @@
 
 .inputBox {
   height: 44px;
-  width: 498px;
+  width: 550px;
   font-size: 20px;
   border-radius: 15px;
   padding-left: 20px;
-  margin-bottom: 10px;
 }
 
 .btn__submit {
@@ -96,6 +93,11 @@
   top: 12px;
   cursor: pointer;
   font-size: 20px;
+}
+
+.spanUp {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 768px) {

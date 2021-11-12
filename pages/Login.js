@@ -81,7 +81,7 @@ const Login = () => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="email"
+                  placeholder="username"
                   className={styles.inputBox}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}

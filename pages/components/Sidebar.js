@@ -1,38 +1,51 @@
 import styles from "../../styles/Component.module.scss";
 import Image from "next/image";
+import { useRouter } from "next/dist/client/router";
 
 const Sidebar = () => {
+  const router = useRouter();
+
   return (
     <div className="Navigation-bar">
       {/* TOP NAV */}
-      <ul className={styles.navbar} style={{ marginTop: "0" }}>
-        <div className="dropdown" style={{ marginRight: "70px" }}>
-          <button className="dropbtn">
-            <img
-              src="/avatar.png"
-              height="30"
-              styles={{ marginTop: "5px", marginRight: "3px" }}
-            />
-            Nama
-          </button>
-          <div
-            className="dropdown-content"
-            style={{ marginRight: "0px", right: "0px" }}
-          >
-            <a href="#" style={{ margin: "0px" }}>
-              Log Out
+      <nav className={styles.nav__main__cms}>
+        <ul>
+          <li className={styles.nav__item}>
+            <a style={{ display: "flex" }}>
+              <img
+                src="/avatar.png"
+                height="30"
+                style={{ marginRight: "10px" }}
+              />
+              Nama
             </a>
-          </div>
-        </div>
-      </ul>
+            <div className={styles.nav__content} style={{ width: "150px" }}>
+              <div className={styles.nav__sub}>
+                <ul>
+                  <li>
+                    <a>Log Out</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
       {/* SIDE NAV */}
+
       <div className={styles.sidenav}>
         <div className={styles.logo}>
           <Image src="/icon.png" width={180} height={87} />
         </div>
-        <a href="../CmsAdmin">CMS_Admin</a>
-        <a href="../CmsUsers">CMS_User</a>
-        <a href="../user">user</a>
+        <li>
+          <a onClick={(e) => router.push("../CmsAdmin")}>CMS_Admin</a>
+        </li>
+        <li>
+          <a onClick={(e) => router.push("../CmsUsers")}>CMS_User</a>
+        </li>
+        <li>
+          <a onClick={(e) => router.push("../user")}>user</a>
+        </li>
         <br />
       </div>
     </div>

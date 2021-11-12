@@ -30,6 +30,10 @@ const EditUser = () => {
         <div className={styles.contentBox}>
           <div className={styles.formBox}>
             <form>
+              <div className={styles.spanUp}>
+                <span>FistName</span>
+                <span style={{ width: "280px" }}>LastName</span>
+              </div>
               <div className={styles.formName}>
                 <div className={styles.form__input}>
                   <input
@@ -47,6 +51,10 @@ const EditUser = () => {
                     className={styles.inputBoxUp}
                   />
                 </div>
+              </div>
+              <div className={styles.spanUp}>
+                <span>Username</span>
+                <span style={{ width: "280px" }}>Number Phone</span>
               </div>
               <div className={styles.formName}>
                 <div className={styles.form__input}>
@@ -66,6 +74,7 @@ const EditUser = () => {
                   />
                 </div>
               </div>
+              <span>Email</span>
               <div className={styles.form__input}>
                 <input
                   type="email"
@@ -74,7 +83,7 @@ const EditUser = () => {
                   className={styles.inputBox}
                 />
               </div>
-              <br />
+              <span>Password</span>
               <div className={styles.form__input}>
                 <input
                   type={passwordShown ? "text" : "password"}

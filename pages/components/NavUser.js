@@ -1,10 +1,13 @@
 import styles from "../../styles/Component.module.scss";
 import Image from "next/dist/client/image";
+import { useRouter } from "next/dist/client/router";
 
 const NavUser = () => {
+  const router = useRouter();
+
   return (
     <nav className={styles.nav__main}>
-      <a href="/User">
+      <a onClick={(e) => router.push("/User")}>
         <img
           src="/logover2.png"
           height="65"
@@ -26,7 +29,9 @@ const NavUser = () => {
             <div className={styles.nav__sub}>
               <ul>
                 <li>
-                  <a href="../../User/EditUser">Edit Profile</a>
+                  <a onClick={(e) => router.push("../../User/EditUser")}>
+                    Edit Profile
+                  </a>
                 </li>
                 <li>
                   <a>Log Out</a>
