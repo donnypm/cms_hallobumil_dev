@@ -15,7 +15,7 @@ const Sidebar = () => {
 
         <a href="../CmsAdmin">CMS_Admin</a>
         <a href="../CmsUsers">CMS_User</a>
-        <a href="../user">user</a>
+        <a href="../users">user</a>
         <br />
         {/* <a href="#contact" style={{ color: "red" }}>
           Log Out
