@@ -19,7 +19,7 @@ export default function CMSHome(props) {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "20px" }}>
+    <div style={{ textAlign: "center", marginTop: "100px" }}>
       <Head>
         <title>Home</title>
       </Head>
@@ -37,6 +37,11 @@ export default function CMSHome(props) {
       >
         Log me out
       </button>
+
+      <div className="center__page">
+        <img src="/avatar.png" style={{ marginLeft: "100px" }} />
+        <p style={{ fontSize: "20px" }}>Welcome Admin (Nama Admin)</p>
+      </div>
     </div>
   );
 }

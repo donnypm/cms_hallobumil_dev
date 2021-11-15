@@ -98,8 +98,12 @@ const EditUser = () => {
                   />
                 </i>
               </div>
-              <div style={{ textAlign: "center" }}>
-                <button type="submit" className={styles.btn__submit}>
+              <div className={styles.button__action}>
+                <button
+                  type="submit"
+                  className={styles.btn__submit}
+                  style={{ backgroundColor: "#F16362", color: "white" }}
+                >
                   Cancel
                 </button>
                 <button type="submit" className={styles.btn__submit}>

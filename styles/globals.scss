@@ -62,3 +62,37 @@ a {
 .input-search[type="text"] {
   background-color: #ffffff;
 }
+
+.center__page {
+  position: absolute;
+  width: 500px;
+  height: auto;
+  top: 30%;
+  left: 35%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.input-form {
+  display: block;
+  width: 350px;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.input-form1 {
+  display: block;
+  width: 740px;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.activeNav {
+  background-color: #f58c8b;
+}

@@ -1,9 +1,13 @@
 import styles from "../../styles/Component.module.scss";
 import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
+import { remove } from "js-cookie";
 
 const Sidebar = () => {
   const router = useRouter();
+
+  const x = router.pathname;
+  console.log(x);
 
   return (
     <div className="Navigation-bar">
@@ -31,8 +35,8 @@ const Sidebar = () => {
           </li>
         </ul>
       </nav>
-      {/* SIDE NAV */}
 
+      {/* SIDE NAV */}
       <div className={styles.sidenav}>
         <div className={styles.logo}>
           <Image src="/icon.png" width={180} height={87} />
