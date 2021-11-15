@@ -13,12 +13,16 @@ import AdminDetail from "react-modal";
 import EditAdmin from "react-modal";
 import Swal from "sweetalert2";
 import Layout from "./components/Layout";
+import Head from "next/dist/shared/lib/head";
 
 (Modal, AdminDetail, EditAdmin).setAppElement();
 
 const CmsAdmin = () => {
   return (
     <>
+      <Head>
+        <title>CMS Admin</title>
+      </Head>
       <Layout />
 
       <section className="article">

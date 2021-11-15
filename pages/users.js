@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../styles/CmsUsers.module.scss";
+import styles from "../styles/users.module.scss";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,35 +9,33 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal";
-import UsersDetail from "react-modal";
-import EditUsers from "react-modal";
+import AdminDetail from "react-modal";
+import EditAdmin from "react-modal";
 import Swal from "sweetalert2";
-import Layout from "./components/Layout";
 import Head from "next/dist/shared/lib/head";
+import Layout from "./components/Layout";
 
-(Modal, UsersDetail, EditUsers).setAppElement();
+(Modal, AdminDetail, EditAdmin).setAppElement();
 
-const CmsUsers = () => {
+const Users = () => {
   return (
     <div>
       <Head>
-        <title>CMS User</title>
+        <title>Users Data</title>
       </Head>
+
       <Layout />
 
       <section className="article">
-        <h1 style={{ lineHeight: "10px", fontFamily: "comfortaa" }}>
-          CMS User
-        </h1>
+        <h1> User </h1>
 
         <div className={styles.header}>
-          <button className="btnCreate">New CMS User</button>
-
-          <div className="search">
+          <div className={styles.search}>
             <form style={{ width: "500px" }}>
               <input
+                name="Search"
                 type="text"
-                placeholder="Search CMS User..."
+                placeholder="Search User..."
                 //  onChange={}
                 // value={}
                 className="input-search"
@@ -48,7 +46,7 @@ const CmsUsers = () => {
 
         <section>
           <section className={styles.users}>
-            <title>CMS Users</title>
+            <title>User</title>
 
             <div className={styles.tblUsers}>
               <div className={styles.column1}>
@@ -106,4 +104,4 @@ const CmsUsers = () => {
   );
 };
 
-export default CmsUsers;
+export default Users;

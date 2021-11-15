@@ -44,7 +44,7 @@ const Sidebar = () => {
           <a onClick={(e) => router.push("../CmsUsers")}>CMS_User</a>
         </li>
         <li>
-          <a onClick={(e) => router.push("../user")}>user</a>
+          <a onClick={(e) => router.push("../users")}>user</a>
         </li>
         <br />
       </div>
