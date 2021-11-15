@@ -64,3 +64,25 @@ a {
 .input-search[type="text"] {
   background-color: #ffffff;
 }
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.input-form {
+  display: block;
+  width: 350px;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.input-form1 {
+  display: block;
+  width: 740px;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
+}
