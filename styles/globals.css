@@ -1,18 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Comfortaa', cursive;
-}
-
-.article {
-  margin-top: 50px;
-  margin-left: 200px; /* Same as the width of the sidenav */
-  font-size: 16px; /* Increased text to enable scrolling */
-  font-weight: bold;
-  padding: 0px 10px;
+  font-family: "Comfortaa", cursive;
 }
 
 a {
@@ -22,69 +14,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-/* BUTTON CREAT & SEARCH untuk dashboard */
-
-.btnCreate {
-  margin-top: 10px;
-  outline: none;
-  text-decoration: none;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  height: 45px;
-  width: 150px;
-  opacity: 1;
-  background-color: #000000;
-  color: white;
-  font-family: 'Comfortaa', cursive;
-  font-weight: 300px;
-  margin-left: 20px;
-  /* border: 1px solid rgba(0, 0, 0, 0.6); */
-}
-
-.search {
-  align-self: center;
-  margin-top: 10px;
-  border-radius: 10px;
-  
-}
-
-.input-search {
-  width: 492px;
-  height: 40px;
-  margin-right: 60px;
-  background-color: #ffffff !important;
-  border: 3px solid rgb(0, 0, 0) !important;
-  border-radius: 10px !important;
-  font-family: 'Comfortaa';
-  font-weight: bold;
-}
-.input-search[type="text"] {
-  background-color: #ffffff;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.input-form {
-  display: block;
-  width: 350px;
-  border-radius: 15px;
-  padding: 10px;
-  margin: 20px;
-}
-
-.input-form1 {
-  display: block;
-  width: 740px;
-  border-radius: 15px;
-  padding: 10px;
-  margin: 10px;
 }

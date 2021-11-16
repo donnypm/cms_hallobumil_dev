@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap");
 
 .content {
   max-width: 1000px;
@@ -7,36 +7,37 @@
 //Navbar
 .navbar {
   overflow: hidden;
-  background-color: rgba(0,0,0,0.77);
+  background-color: rgba(0, 0, 0, 0.77);
   position: fixed;
   top: 0;
-  margin-left:190px ; 
-  width: 1235px;
-  height: 50px;
+  margin-left: 198px;
+  width: 1090px;
+  height: 60px;
 }
 
 .navbar a {
-  float: right;
-  margin-right: 20px;
-  display: block;
-  color: #F58C8B;
-  font-weight: bold;  
-  font-family: 'Comfortaa', cursive;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 30px;
+  color: #f58c8b;
+  font-weight: bold;
+  font-family: "Comfortaa", cursive;
   text-align: center;
   text-decoration: none;
   font-size: 20px;
-
+  height: 50px;
 }
 
 //Side Bar
 .sidenav {
   height: 100%;
-  width: 190px;
+  width: 198px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgba(0,0,0,0.77);
+  background-color: rgba(0, 0, 0, 0.77);
   overflow-x: hidden;
   padding-top: 20px;
 }
@@ -46,18 +47,151 @@
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 18px;
-  font-family: 'Comfortaa', cursive;
+  font-family: "Comfortaa", cursive;
   font-weight: bold;
   color: #000000;
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   display: block;
 }
 
 .sidenav a:hover {
-  background-color: #FBD3C4;
+  background-color: #fbd3c4;
 }
 
 .logo {
   display: flex;
   flex-direction: row;
+}
+
+.sidenav > li {
+  list-style-type: none;
+}
+
+.sidenav .activeNav {
+  background-color: #fbd3c4;
+}
+
+// NavCMS
+.nav__main__cms {
+  width: 100%;
+  margin-right: 500px;
+  background-color: #3b3b3b;
+  height: 62px;
+  color: #f58c8b;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  margin-left: 198px;
+}
+
+.nav__content__cms {
+  position: absolute;
+  width: 150px;
+  top: 60px;
+  overflow: hidden;
+  background-color: #3b3b3b;
+  display: none;
+}
+
+//NavbarUser
+.nav__main {
+  width: 100%;
+  background-color: #3b3b3b;
+  height: 62px;
+  color: #f58c8b;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+}
+
+.nav__main .logo {
+  float: left;
+  height: 40px;
+  padding: 15px 30px;
+  line-height: 40px;
+}
+
+.nav__main > ul {
+  margin: 0;
+  padding: 0;
+  float: left;
+  list-style-type: none;
+}
+
+.nav__main > ul > li {
+  float: left;
+}
+
+.nav__item {
+  margin-right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  margin-top: 10px;
+}
+
+.nav__item a:hover {
+  color: #fff;
+}
+
+.nav__item > a {
+  display: inline-block;
+  padding: 15px 20px;
+  line-height: 30px;
+  color: #f58c8b;
+  text-decoration: none;
+  height: 40px;
+  font-family: "Comfortaa", cursive;
+  margin-right: 15px;
+}
+
+.nav__item:hover {
+  background-color: #444;
+}
+
+.nav__content {
+  position: absolute;
+  top: 50px;
+  overflow: hidden;
+  background-color: #3b3b3b;
+  display: none;
+  width: 150px;
+}
+
+.nav__content a {
+  color: #f58c8b;
+  text-decoration: none;
+}
+
+.nav__content a:hover {
+  text-decoration: underline;
+}
+
+.nav__sub {
+  padding: 20px;
+}
+
+.nav__sub li:hover {
+  background-color: #444;
+}
+
+.nav__sub ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.nav__sub ul li a {
+  display: inline-block;
+  padding: 5px 0;
+}
+
+.nav__item:hover .nav__content {
+  display: block;
 }
