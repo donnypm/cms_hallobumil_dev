@@ -27,7 +27,7 @@ const Users = () => {
       <Layout />
 
       <section className="article">
-        <h1> User </h1>
+        <h1 style={{ lineHeight: "10px", fontFamily: "comfortaa" }}> User </h1>
 
         <div className={styles.header}>
           <div className={styles.search}>

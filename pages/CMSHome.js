@@ -15,28 +15,16 @@ export default function CMSHome(props) {
     dispatch(logoutUser());
     router.push("/");
     Cookies.remove("token");
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
+    <div>
       <Head>
         <title>Home</title>
       </Head>
 
       <Layout />
-      <h1>Welcome to CMS HalloBumil</h1>
-      <button
-        onClick={logout}
-        style={{
-          fontSize: "30px",
-          color: "red",
-          backgroundColor: "black",
-          cursor: "pointer",
-        }}
-      >
-        Log me out
-      </button>
 
       <div className="center__page">
         <img src="/avatar.png" style={{ marginLeft: "100px" }} />

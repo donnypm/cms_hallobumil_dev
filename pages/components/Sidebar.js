@@ -1,20 +1,34 @@
 import styles from "../../styles/Component.module.scss";
 import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
-import { remove } from "js-cookie";
+import Cookies from "js-cookie";
+import { logoutUser } from "../../redux/actions/loginActions";
+import { useDispatch } from "react-redux";
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const x = router.pathname;
   console.log(x);
+
+  const logout = () => {
+    // e.preventDefault;
+    dispatch(logoutUser());
+    router.push("/");
+    Cookies.remove("token");
+    window.location.reload();
+  };
 
   return (
     <div className="Navigation-bar">
       {/* TOP NAV */}
       <nav className={styles.nav__main__cms}>
         <ul>
-          <li className={styles.nav__item}>
+          <li
+            className={styles.nav__item}
+            style={{ marginTop: "0", marginRight: "200px" }}
+          >
             <a style={{ display: "flex" }}>
               <img
                 src="/avatar.png"
@@ -23,11 +37,11 @@ const Sidebar = () => {
               />
               Nama
             </a>
-            <div className={styles.nav__content} style={{ width: "150px" }}>
+            <div className={styles.nav__content}>
               <div className={styles.nav__sub}>
                 <ul>
                   <li>
-                    <a>Log Out</a>
+                    <a onClick={logout}>Log Out</a>
                   </li>
                 </ul>
               </div>

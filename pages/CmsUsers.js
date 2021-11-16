@@ -28,6 +28,7 @@ const CmsUsers = () => {
       <Head>
         <title>CMS User</title>
       </Head>
+
       <Layout />
 
       {/* MODAL CREATE CMS_USER */}
@@ -149,7 +150,7 @@ const CmsUsers = () => {
           CMS User
         </h1>
 
-        <div className={styles.header}>
+        <div className="header">
           <button className="btnCreate" onClick={() => setModalIsOpen(true)}>
             New CMS User
           </button>

@@ -73,7 +73,8 @@
 
 // NavCMS
 .nav__main__cms {
-  width: 85%;
+  width: 100%;
+  margin-right: 500px;
   background-color: #3b3b3b;
   height: 62px;
   color: #f58c8b;
@@ -103,9 +104,9 @@
   color: #f58c8b;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  // align-items: center;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
 }
 
@@ -132,6 +133,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 30px;
+  margin-top: 10px;
 }
 
 .nav__item a:hover {
@@ -141,10 +144,10 @@
 .nav__item > a {
   display: inline-block;
   padding: 15px 20px;
-  height: 30px;
-  line-height: 40px;
+  line-height: 30px;
   color: #f58c8b;
   text-decoration: none;
+  height: 40px;
 }
 
 .nav__item:hover {
@@ -153,10 +156,11 @@
 
 .nav__content {
   position: absolute;
-  top: 60px;
+  top: 50px;
   overflow: hidden;
   background-color: #3b3b3b;
   display: none;
+  width: 150px;
 }
 
 .nav__content a {

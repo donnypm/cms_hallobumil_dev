@@ -21,7 +21,6 @@ a {
 }
 
 //BUTTON CREAT & SEARCH untuk dashboard
-
 .btnCreate {
   outline: none;
   border-radius: 15px;
@@ -29,7 +28,6 @@ a {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  text-transform: uppercase;
   height: 45px;
   width: 180px;
   opacity: 1;
@@ -68,7 +66,7 @@ a {
   width: 500px;
   height: auto;
   top: 30%;
-  left: 35%;
+  left: 45%;
 }
 
 .form-group {
@@ -93,6 +91,9 @@ a {
   margin: 10px;
 }
 
-.activeNav {
-  background-color: #f58c8b;
+//BUTTON CREATE & SEARCH >> jadinya di global biar ga bikin berkali2
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
 }

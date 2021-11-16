@@ -10,38 +10,38 @@
 }
 
 .admin {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
-.tblAdmin {
-  margin: 30px 0px;
-  display: flex;
-}
+// .tblAdmin {
+//   margin: 30px 0px;
+//   display: flex;
+// }
 
-.column1 {
-  width: 40%;
-  padding: 18px;
-  background-color: #fbd3c4;
-}
+// .column1 {
+//   width: 40%;
+//   padding: 18px;
+//   background-color: #fbd3c4;
+// }
 
-.column2 {
-  width: 20%;
-  padding: 18px;
-  background-color: #fbd3c4;
-}
+// .column2 {
+//   width: 20%;
+//   padding: 18px;
+//   background-color: #fbd3c4;
+// }
 
-.column3 {
-  width: 20%;
-  padding: 18px;
-  background-color: #fbd3c4;
-}
+// .column3 {
+//   width: 20%;
+//   padding: 18px;
+//   background-color: #fbd3c4;
+// }
 
-.column4 {
-  width: 20%;
-  padding: 18px;
-  margin-right: 5%;
-  background-color: #fbd3c4;
-}
+// .column4 {
+//   width: 20%;
+//   padding: 18px;
+//   margin-right: 5%;
+//   background-color: #fbd3c4;
+// }
 
 .button {
   display: flex;
@@ -64,11 +64,4 @@
   height: 545px;
   left: 277px;
   top: 93px;
-}
-
-//BUTTON CREATE & SEARCH >> jadinya di global biar ga bikin berkali2
-.header {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 30px;
 }
