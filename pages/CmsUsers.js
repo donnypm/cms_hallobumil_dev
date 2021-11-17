@@ -14,6 +14,8 @@ import EditUsers from "react-modal";
 import Swal from "sweetalert2";
 import Layout from "./components/Layout";
 import Head from "next/dist/shared/lib/head";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteCmsUser, getCmsUser } from "../redux/actions/cmsUserActions";
 
 (ModalUserCms, UsersDetail, EditUsers).setAppElement();
 
@@ -22,6 +24,16 @@ const CmsUsers = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [descModalIsOpen, setdescModalIsOpen] = useState(false);
   const [editModalIsOpen, seteditModalIsOpen] = useState(false);
+
+  // Get Data
+  const dispatch = useDispatch();
+  const allCmsUsers = useSelector((state) => state.CmsUsers);
+  const { loading, error, cmsUsers } = allCmsUsers;
+
+  // LOAD DATA
+  useEffect(() => {
+    dispatch(getCmsUser());
+  }, []);
 
   return (
     <div>
@@ -146,9 +158,7 @@ const CmsUsers = () => {
       </section>
 
       <section className="article">
-        <h1 style={{ lineHeight: "10px", fontFamily: "comfortaa" }}>
-          CMS User
-        </h1>
+        <h1 className="title-article">CMS User</h1>
 
         <div className="header">
           <button className="btnCreate" onClick={() => setModalIsOpen(true)}>
@@ -168,60 +178,95 @@ const CmsUsers = () => {
           </div>
         </div>
 
-        <section>
-          <section className={styles.users}>
-            <title>CMS Users</title>
+        <section className={styles.users}>
+          <div style={{ overflowX: "auto" }}>
+            <table
+              class="table table-borderless"
+              style={{ width: "1000px", marginTop: "10px" }}
+            >
+              <thead>
+                <tr
+                  style={{
+                    backgroundColor: "#fbd3c4",
+                  }}
+                >
+                  <th scope="col">No</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {loading
+                  ? "Loading..."
+                  : error
+                  ? error.message
+                  : cmsUsers.map((u) => (
+                      <tr key={u.id}>
+                        <th scope="row">{u.id}</th>
+                        <td>{u.email}</td>
+                        <td>{u.username}</td>
+                        <td>{u.phone}</td>
+                        <td>
+                          <div className={styles.column}>
+                            {/* DETAIL  */}
+                            <button className={styles.btnAction}>
+                              <FontAwesomeIcon
+                                icon={faInfoCircle}
+                                size="1x"
+                                style={{ color: "black" }}
+                              />
+                            </button>
 
-            <div className={styles.tblUsers}>
-              <div className={styles.column1}>
-                <span>Email</span>
-              </div>
+                            {/* EDIT  */}
+                            <button className={styles.btnAction}>
+                              <FontAwesomeIcon
+                                icon={faPen}
+                                size="1x"
+                                style={{ color: "black" }}
+                              />
+                            </button>
 
-              <div className={styles.column2}>
-                <span>Username</span>
-              </div>
-
-              <div className={styles.column3}>
-                <div>
-                  <span>Phone</span>
-                </div>
-              </div>
-
-              <div className={styles.column4}>
-                <div>
-                  <span>Action</span>
-                </div>
-              </div>
-            </div>
-            <div className={styles.column}>
-              {/* DETAIL PRODUCT */}
-              <button className={styles.btnAction}>
-                <FontAwesomeIcon
-                  icon={faInfoCircle}
-                  size="1x"
-                  style={{ color: "black" }}
-                />
-              </button>
-
-              {/* EDIT PRODUCT */}
-              <button className={styles.btnAction}>
-                <FontAwesomeIcon
-                  icon={faPen}
-                  size="1x"
-                  style={{ color: "black" }}
-                />
-              </button>
-
-              {/* DELETE PRODUCT */}
-              <button className={styles.btnAction}>
-                <FontAwesomeIcon
-                  icon={faTrash}
-                  size="1x"
-                  style={{ color: "black" }}
-                />
-              </button>
-            </div>
-          </section>
+                            {/* DELETE  */}
+                            <button
+                              className={styles.btnAction}
+                              onClick={() =>
+                                Swal.fire({
+                                  title: "Are you sure?",
+                                  text: "You won't be able to revert this!",
+                                  icon: "warning",
+                                  showCancelButton: true,
+                                  confirmButtonColor: "#3085d6",
+                                  cancelButtonColor: "#d33",
+                                  confirmButtonText: "Yes, delete it!",
+                                }).then((result) => {
+                                  if (result.isConfirmed) {
+                                    dispatch(
+                                      deleteCmsUser(u.id),
+                                      Swal.fire(
+                                        "Deleted!",
+                                        "Your file has been deleted.",
+                                        "success"
+                                      )
+                                    );
+                                  }
+                                })
+                              }
+                            >
+                              <FontAwesomeIcon
+                                icon={faTrash}
+                                size="1x"
+                                style={{ color: "black" }}
+                              />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       </section>
     </div>

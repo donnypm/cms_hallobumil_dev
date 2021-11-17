@@ -69,12 +69,16 @@
 
 .sidenav .activeNav {
   background-color: #fbd3c4;
+  font-weight: bold;
+}
+
+.sidenav .nonactiveNav {
+  background-color: #c4c4c4;
 }
 
 // NavCMS
 .nav__main__cms {
   width: 100%;
-  margin-right: 500px;
   background-color: #3b3b3b;
   height: 62px;
   color: #f58c8b;

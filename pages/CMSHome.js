@@ -27,7 +27,7 @@ export default function CMSHome(props) {
       <Layout />
 
       <div className="center__page">
-        <img src="/avatar.png" style={{ marginLeft: "100px" }} />
+        <img src="/avatar.png" />
         <p style={{ fontSize: "20px" }}>Welcome Admin (Nama Admin)</p>
       </div>
     </div>
