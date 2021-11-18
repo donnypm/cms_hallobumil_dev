@@ -12,7 +12,7 @@ const User = () => {
       <NavUser />
 
       <div className={styles.center}>
-        <img src="/avatar.png" style={{ marginLeft: "100px" }} />
+        <img src="/avatar.png" className={styles.avatarHome} />
         <p style={{ fontSize: "20px" }}>
           Hai Bumil, Selamat datang besok lahiran ya
         </p>
