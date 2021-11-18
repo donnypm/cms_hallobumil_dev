@@ -22,48 +22,31 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="Navigation-bar">
+    <>
       {/* TOP NAV */}
-      <nav className={styles.nav__main__cms}>
-        <div
-          style={{
-            marginLeft: "30px",
-            marginTop: "5px",
-            fontSize: "24px",
-            fontWeight: "bold",
-            fontFamily: "Comfortaa",
-          }}
-        >
-          {x === "/CmsAdmin"
-            ? "CMS Admin Dashboard"
-            : x === "/CmsUsers"
-            ? "CMS User Dashboard"
-            : x === "/users"
-            ? "Users Dashboard"
-            : ""}
-        </div>
-        <ul>
-          <li
-            className={styles.nav__item}
-            style={{ marginTop: "0", marginRight: "200px" }}
-          >
-            <a style={{ display: "flex" }}>
-              <img
-                src="/avatar.png"
-                height="30"
-                style={{ marginRight: "10px" }}
-              />
-              Nama
-            </a>
-            <div className={styles.nav__content}>
-              <div className={styles.nav__sub}>
-                <ul>
-                  <li>
-                    <a onClick={logout}>Log Out</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+      <nav className={styles.nav}>
+        <ul className={styles.nav__list}>
+          <li className={styles.nav__listlogo} style={{ fontSize: "24px" }}>
+            {x === "/CmsAdmin"
+              ? "CMS Admin Dashboard"
+              : x === "/CmsUsers"
+              ? "CMS User Dashboard"
+              : x === "/users"
+              ? "Users Dashboard"
+              : ""}
+          </li>
+          <li className={styles.nav__listitem} style={{ marginRight: "200px" }}>
+            <img
+              src="/avatar.png"
+              height="30"
+              style={{ marginRight: "10px" }}
+            />
+            Nama
+            <ul className={styles.nav__listitemdrop}>
+              <li>
+                <a onClick={logout}>Log Out</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
@@ -111,7 +94,7 @@ const Sidebar = () => {
         </li>
         <br />
       </div>
-    </div>
+    </>
   );
 };
 

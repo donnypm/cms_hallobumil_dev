@@ -13,9 +13,9 @@ const User = () => {
 
       <div className={styles.center}>
         <img src="/avatar.png" className={styles.avatarHome} />
-        <p style={{ fontSize: "20px" }}>
+        <h1 style={{ fontSize: "20px" }}>
           Hai Bumil, Selamat datang besok lahiran ya
-        </p>
+        </h1>
       </div>
     </div>
   );
