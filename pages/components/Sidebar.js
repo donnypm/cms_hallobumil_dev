@@ -35,7 +35,7 @@ const Sidebar = () => {
               ? "Users Dashboard"
               : ""}
           </li>
-          <li className={styles.nav__listitem} style={{ marginRight: "200px" }}>
+          <li className={styles.nav__listitem} style={{ marginRight: "220px" }}>
             <img
               src="/avatar.png"
               height="30"

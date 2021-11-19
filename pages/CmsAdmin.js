@@ -42,6 +42,9 @@ const CmsAdmin = () => {
     setInputSearch(e.target.value);
   };
 
+  const userData = useSelector((state) => state.isLogin);
+  const { roleAccess } = userData;
+
   return (
     <>
       <Head>
@@ -243,47 +246,53 @@ const CmsAdmin = () => {
                                 />
                               </button>
 
-                              {/* EDIT  */}
-                              <button className={styles.btnAction}>
-                                <FontAwesomeIcon
-                                  icon={faPen}
-                                  size="1x"
-                                  style={{ color: "black" }}
-                                />
-                              </button>
-
-                              {/* DELETE  */}
-                              <button
-                                className={styles.btnAction}
-                                onClick={() =>
-                                  Swal.fire({
-                                    title: "Are you sure?",
-                                    text: "You won't be able to revert this!",
-                                    icon: "warning",
-                                    showCancelButton: true,
-                                    confirmButtonColor: "#3085d6",
-                                    cancelButtonColor: "#d33",
-                                    confirmButtonText: "Yes, delete it!",
-                                  }).then((result) => {
-                                    if (result.isConfirmed) {
-                                      dispatch(
-                                        deleteAdmin(a.id),
-                                        Swal.fire(
-                                          "Deleted!",
-                                          "Your file has been deleted.",
-                                          "success"
-                                        )
-                                      );
+                              {roleAccess === "Admin" ? (
+                                <>
+                                  {" "}
+                                  {/* EDIT  */}
+                                  <button className={styles.btnAction}>
+                                    <FontAwesomeIcon
+                                      icon={faPen}
+                                      size="1x"
+                                      style={{ color: "black" }}
+                                    />
+                                  </button>
+                                  {/* DELETE  */}
+                                  <button
+                                    className={styles.btnAction}
+                                    onClick={() =>
+                                      Swal.fire({
+                                        title: "Are you sure?",
+                                        text: "You won't be able to revert this!",
+                                        icon: "warning",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "#3085d6",
+                                        cancelButtonColor: "#d33",
+                                        confirmButtonText: "Yes, delete it!",
+                                      }).then((result) => {
+                                        if (result.isConfirmed) {
+                                          dispatch(
+                                            deleteAdmin(a.id),
+                                            Swal.fire(
+                                              "Deleted!",
+                                              "Your file has been deleted.",
+                                              "success"
+                                            )
+                                          );
+                                        }
+                                      })
                                     }
-                                  })
-                                }
-                              >
-                                <FontAwesomeIcon
-                                  icon={faTrash}
-                                  size="1x"
-                                  style={{ color: "black" }}
-                                />
-                              </button>
+                                  >
+                                    <FontAwesomeIcon
+                                      icon={faTrash}
+                                      size="1x"
+                                      style={{ color: "black" }}
+                                    />
+                                  </button>{" "}
+                                </>
+                              ) : (
+                                <></>
+                              )}
                             </div>
                           </td>
                         </tr>

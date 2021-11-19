@@ -10,14 +10,6 @@ export default function CMSHome(props) {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const logout = () => {
-    // e.preventDefault;
-    dispatch(logoutUser());
-    router.push("/");
-    Cookies.remove("token");
-    // window.location.reload();
-  };
-
   return (
     <div>
       <Head>
