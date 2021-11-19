@@ -30,6 +30,13 @@ const Users = () => {
     dispatch(getUsers());
   }, []);
 
+// SEARCH DATA
+  const [inputSearch, setInputSearch] = useState("");
+  const handleChangeSearch = (e) => {
+    e.preventDefault();
+    setInputSearch(e.target.value);
+  };
+
   return (
     <div>
       <Head>
@@ -45,11 +52,11 @@ const Users = () => {
           <div className={styles.search}>
             <form style={{ width: "500px" }}>
               <input
-                name="Search"
                 type="text"
                 placeholder="Search User..."
-                //  onChange={}
-                // value={}
+                name={inputSearch}
+                onChange={handleChangeSearch}
+                value={inputSearch}
                 className="input-search"
               />
             </form>
@@ -77,7 +84,22 @@ const Users = () => {
                   ? "Loading..."
                   : error
                   ? error.message
-                  : users.map((u) => (
+                  : users
+                    .filter((u) => {
+                      if (inputSearch === "") {
+                        return u;
+                      } else if (
+                        (u.username
+                          .toLowerCase()
+                          .includes(inputSearch.toLowerCase()),
+                        u.email
+                        .toLowerCase()
+                        .includes(inputSearch.toLowerCase()))
+                      ) {
+                        return u;
+                      }
+                    })
+                    .map((u) => (
                       <tr key={u.id}>
                         <th scope="row">{u.id}</th>
                         <td>{u.email}</td>

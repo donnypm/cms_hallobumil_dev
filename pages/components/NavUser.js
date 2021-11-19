@@ -6,42 +6,40 @@ const NavUser = () => {
   const router = useRouter();
 
   return (
-    <nav className={styles.nav__main}>
-      <a onClick={(e) => router.push("/User")}>
-        <img
-          src="/logover2.png"
-          height="65"
-          width="180"
-          style={{ marginTop: "5px", marginLeft: "30px" }}
-        />
-      </a>
-      <ul>
-        <li className={styles.nav__item}>
-          <a style={{ display: "flex" }}>
+    <>
+      <nav className={styles.nav} style={{ marginLeft: "0px" }}>
+        <ul className={styles.nav__list}>
+          <li className={styles.nav__listlogo}>
+            <a onClick={(e) => router.push("/User")}>
+              <img
+                src="/logover2.png"
+                height="65"
+                width="180"
+                style={{ marginTop: "5px", marginLeft: "30px" }}
+              />
+            </a>
+          </li>
+          <li className={styles.nav__listitem} style={{ marginRight: "10px" }}>
             <img
-              src="/user-solid.png"
+              src="/avatar.png"
               height="30"
               style={{ marginRight: "10px" }}
             />
             Nama
-          </a>
-          <div className={styles.nav__content}>
-            <div className={styles.nav__sub}>
-              <ul>
-                <li>
-                  <a onClick={(e) => router.push("../../User/EditUser")}>
-                    Edit Profile
-                  </a>
-                </li>
-                <li>
-                  <a>Log Out</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </nav>
+            <ul className={styles.nav__listitemdrop}>
+              <li>
+                <a onClick={(e) => router.push("../../User/EditUser")}>
+                  Edit Profile
+                </a>
+              </li>
+              <li>
+                <a>Log Out</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </>
   );
 };
 

@@ -35,6 +35,13 @@ const CmsUsers = () => {
     dispatch(getCmsUser());
   }, []);
 
+  // SEARCH DATA
+  const [inputSearch, setInputSearch] = useState("");
+  const handleChangeSearch = (e) => {
+    e.preventDefault();
+    setInputSearch(e.target.value);
+  };
+
   return (
     <div>
       <Head>
@@ -170,8 +177,9 @@ const CmsUsers = () => {
               <input
                 type="text"
                 placeholder="Search CMS User..."
-                //  onChange={}
-                // value={}
+                name={inputSearch}
+                onChange={handleChangeSearch}
+                value={inputSearch}
                 className="input-search"
               />
             </form>
@@ -202,68 +210,83 @@ const CmsUsers = () => {
                   ? "Loading..."
                   : error
                   ? error.message
-                  : cmsUsers.map((u) => (
-                      <tr key={u.id}>
-                        <th scope="row">{u.id}</th>
-                        <td>{u.email}</td>
-                        <td>{u.username}</td>
-                        <td>{u.phone}</td>
-                        <td>
-                          <div className={styles.column}>
-                            {/* DETAIL  */}
-                            <button className={styles.btnAction}>
-                              <FontAwesomeIcon
-                                icon={faInfoCircle}
-                                size="1x"
-                                style={{ color: "black" }}
-                              />
-                            </button>
+                  : cmsUsers
+                      .filter((u) => {
+                        if (inputSearch === "") {
+                          return u;
+                        } else if (
+                          (u.username
+                            .toLowerCase()
+                            .includes(inputSearch.toLowerCase()),
+                          u.email
+                            .toLowerCase()
+                            .includes(inputSearch.toLowerCase()))
+                        ) {
+                          return u;
+                        }
+                      })
+                      .map((u) => (
+                        <tr key={u.id}>
+                          <th scope="row">{u.id}</th>
+                          <td>{u.email}</td>
+                          <td>{u.username}</td>
+                          <td>{u.phone}</td>
+                          <td>
+                            <div className={styles.column}>
+                              {/* DETAIL  */}
+                              <button className={styles.btnAction}>
+                                <FontAwesomeIcon
+                                  icon={faInfoCircle}
+                                  size="1x"
+                                  style={{ color: "black" }}
+                                />
+                              </button>
 
-                            {/* EDIT  */}
-                            <button className={styles.btnAction}>
-                              <FontAwesomeIcon
-                                icon={faPen}
-                                size="1x"
-                                style={{ color: "black" }}
-                              />
-                            </button>
+                              {/* EDIT  */}
+                              <button className={styles.btnAction}>
+                                <FontAwesomeIcon
+                                  icon={faPen}
+                                  size="1x"
+                                  style={{ color: "black" }}
+                                />
+                              </button>
 
-                            {/* DELETE  */}
-                            <button
-                              className={styles.btnAction}
-                              onClick={() =>
-                                Swal.fire({
-                                  title: "Are you sure?",
-                                  text: "You won't be able to revert this!",
-                                  icon: "warning",
-                                  showCancelButton: true,
-                                  confirmButtonColor: "#3085d6",
-                                  cancelButtonColor: "#d33",
-                                  confirmButtonText: "Yes, delete it!",
-                                }).then((result) => {
-                                  if (result.isConfirmed) {
-                                    dispatch(
-                                      deleteCmsUser(u.id),
-                                      Swal.fire(
-                                        "Deleted!",
-                                        "Your file has been deleted.",
-                                        "success"
-                                      )
-                                    );
-                                  }
-                                })
-                              }
-                            >
-                              <FontAwesomeIcon
-                                icon={faTrash}
-                                size="1x"
-                                style={{ color: "black" }}
-                              />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
+                              {/* DELETE  */}
+                              <button
+                                className={styles.btnAction}
+                                onClick={() =>
+                                  Swal.fire({
+                                    title: "Are you sure?",
+                                    text: "You won't be able to revert this!",
+                                    icon: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#3085d6",
+                                    cancelButtonColor: "#d33",
+                                    confirmButtonText: "Yes, delete it!",
+                                  }).then((result) => {
+                                    if (result.isConfirmed) {
+                                      dispatch(
+                                        deleteCmsUser(u.id),
+                                        Swal.fire(
+                                          "Deleted!",
+                                          "Your file has been deleted.",
+                                          "success"
+                                        )
+                                      );
+                                    }
+                                  })
+                                }
+                              >
+                                <FontAwesomeIcon
+                                  icon={faTrash}
+                                  size="1x"
+                                  style={{ color: "black" }}
+                                />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
               </tbody>
             </table>
           </div>

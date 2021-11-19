@@ -19,7 +19,7 @@ const EditUser = () => {
       </Head>
 
       <NavUser />
-      <h1 style={{ textAlign: "center", fontSize: "32px", marginTop: "80px" }}>
+      <h1 style={{ textAlign: "center", fontSize: "32px", marginTop: "100px" }}>
         Edit Profile
       </h1>
 
