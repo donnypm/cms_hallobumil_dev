@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 import Layout from "./components/Layout";
 import Head from "next/dist/shared/lib/head";
 import { useDispatch, useSelector } from "react-redux";
-import { getCmsuser } from "../redux/actions/cmsUserActions";
+import { deleteCmsUser, getCmsUser } from "../redux/actions/cmsUserActions";
 
 (ModalUserCms, UsersDetail, EditUsers).setAppElement();
 
@@ -25,18 +25,25 @@ const CmsUsers = () => {
   const [descModalIsOpen, setdescModalIsOpen] = useState(false);
   const [editModalIsOpen, seteditModalIsOpen] = useState(false);
 
-  //Get Data
+  // Get Data
   const dispatch = useDispatch();
   const allCmsUsers = useSelector((state) => state.CmsUsers);
   const { loading, error, cmsUsers } = allCmsUsers;
 
-  //Load Data
+  // LOAD DATA
   useEffect(() => {
-    dispatch(getCmsuser());
+    dispatch(getCmsUser());
   }, []);
-  
+
+  // SEARCH DATA
+  const [inputSearch, setInputSearch] = useState("");
+  const handleChangeSearch = (e) => {
+    e.preventDefault();
+    setInputSearch(e.target.value);
+  };
+
   return (
-   <div>
+    <div>
       <Head>
         <title>CMS User</title>
       </Head>
@@ -157,10 +164,7 @@ const CmsUsers = () => {
         </ModalUserCms>
       </section>
 
-      <section className={styles.article}>
-      <h1 style={{ fontSize: "30px", fontFamily: "comfortaa", fontWeight: "bold"}}>
-          CMS User
-      </h1>
+      <section className="article">
 
         <div className="header">
           <button className="btnCreate" onClick={() => setModalIsOpen(true)}>
@@ -172,18 +176,21 @@ const CmsUsers = () => {
               <input
                 type="text"
                 placeholder="Search CMS User..."
-                //  onChange={}
-                // value={}
+                name={inputSearch}
+                onChange={handleChangeSearch}
+                value={inputSearch}
                 className="input-search"
               />
             </form>
           </div>
         </div>
 
-        <section>
-          <section className={styles.users}>
+        <section className={styles.users}>
           <div style={{ overflowX: "auto" }}>
-            <table class="table table-borderless" style={{ width: "1000px" }}>
+            <table
+              className="table table-borderless"
+              style={{ width: "1000px", marginTop: "10px" }}
+            >
               <thead>
                 <tr
                   style={{
@@ -202,65 +209,89 @@ const CmsUsers = () => {
                   ? "Loading..."
                   : error
                   ? error.message
-                  : cmsUsers.map((u) => (
-                      <tr key={u.id}>
-                        <th scope="row">{u.id}</th>
-                        <td>{u.email}</td>
-                        <td>{u.username}</td>
-                        <td>{u.phone}</td>
-                        <td>
-                          <div className={styles.column}>
-                            {/* DETAIL  */}
-                            <button className={styles.btnAction}>
-                              <FontAwesomeIcon
-                                icon={faInfoCircle}
-                                size="1x"
-                                style={{ color: "black" }}
-                              />
-                            </button>
+                  : cmsUsers
+                      .filter((u) => {
+                        if (inputSearch === "") {
+                          return u;
+                        } else if (
+                          (u.username
+                            .toLowerCase()
+                            .includes(inputSearch.toLowerCase()),
+                          u.email
+                            .toLowerCase()
+                            .includes(inputSearch.toLowerCase()))
+                        ) {
+                          return u;
+                        }
+                      })
+                      .map((u) => (
+                        <tr key={u.id}>
+                          <th scope="row">{u.id}</th>
+                          <td>{u.email}</td>
+                          <td>{u.username}</td>
+                          <td>{u.phone}</td>
+                          <td>
+                            <div className={styles.column}>
+                              {/* DETAIL  */}
+                              <button className={styles.btnAction}>
+                                <FontAwesomeIcon
+                                  icon={faInfoCircle}
+                                  size="1x"
+                                  style={{ color: "black" }}
+                                />
+                              </button>
 
-                            {/* EDIT  */}
-                            <button className={styles.btnAction}>
-                              <FontAwesomeIcon
-                                icon={faPen}
-                                size="1x"
-                                style={{ color: "black" }}
-                              />
-                            </button>
+                              {/* EDIT  */}
+                              <button className={styles.btnAction}>
+                                <FontAwesomeIcon
+                                  icon={faPen}
+                                  size="1x"
+                                  style={{ color: "black" }}
+                                />
+                              </button>
 
-                            {/* DELETE  */}
-                            <button
-                              className={styles.btnAction}
-                              onClick={() =>
-                                dispatch(
-                                  deleteUsers(u.id),
-                                  Swal.fire(
-                                    "Berhasil Menghapus!",
-                                    "User " +
-                                      u.username +
-                                      " Berhasil di Hapus!",
-                                    "success"
-                                  )
-                                )
-                              }
-                            >
-                              <FontAwesomeIcon
-                                icon={faTrash}
-                                size="1x"
-                                style={{ color: "black" }}
-                              />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
+                              {/* DELETE  */}
+                              <button
+                                className={styles.btnAction}
+                                onClick={() =>
+                                  Swal.fire({
+                                    title: "Are you sure?",
+                                    text: "You won't be able to revert this!",
+                                    icon: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#3085d6",
+                                    cancelButtonColor: "#d33",
+                                    confirmButtonText: "Yes, delete it!",
+                                  }).then((result) => {
+                                    if (result.isConfirmed) {
+                                      dispatch(
+                                        deleteCmsUser(u.id),
+                                        Swal.fire(
+                                          "Deleted!",
+                                          "Your file has been deleted.",
+                                          "success"
+                                        )
+                                      );
+                                    }
+                                  })
+                                }
+                              >
+                                <FontAwesomeIcon
+                                  icon={faTrash}
+                                  size="1x"
+                                  style={{ color: "black" }}
+                                />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
               </tbody>
             </table>
           </div>
         </section>
       </section>
-      </section>
-  </div>
+    </div>
   );
 };
 

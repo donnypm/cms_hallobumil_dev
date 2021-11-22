@@ -10,14 +10,6 @@ export default function CMSHome(props) {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const logout = () => {
-    // e.preventDefault;
-    dispatch(logoutUser());
-    router.push("/");
-    Cookies.remove("token");
-    // window.location.reload();
-  };
-
   return (
     <div>
       <Head>
@@ -27,7 +19,7 @@ export default function CMSHome(props) {
       <Layout />
 
       <div className="center__page">
-        <img src="/avatar.png" style={{ marginLeft: "5%" }} />
+        <img src="/avatar.png" />
         <p style={{ fontSize: "20px" }}>Welcome Admin (Nama Admin)</p>
       </div>
     </div>

@@ -4,13 +4,14 @@ import { useRouter } from "next/dist/client/router";
 import Cookies from "js-cookie";
 import { logoutUser } from "../../redux/actions/loginActions";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
   const x = router.pathname;
-  console.log(x);
+  console.log("ini halaman " + x);
 
   const logout = () => {
     // e.preventDefault;
@@ -21,31 +22,31 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="Navigation-bar">
+    <>
       {/* TOP NAV */}
-      <nav className={styles.nav__main__cms}>
-        <ul>
-          <li
-            className={styles.nav__item}
-            style={{ marginTop: "0", marginRight: "200px" }}
-          >
-            <a style={{ display: "flex" }}>
-              <img
-                src="/avatar.png"
-                height="30"
-                style={{ marginRight: "10px" }}
-              />
-              Nama
-            </a>
-            <div className={styles.nav__content}>
-              <div className={styles.nav__sub}>
-                <ul>
-                  <li>
-                    <a onClick={logout}>Log Out</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+      <nav className={styles.nav}>
+        <ul className={styles.nav__list}>
+          <li className={styles.nav__listlogo} style={{ fontSize: "24px" }}>
+            {x === "/CmsAdmin"
+              ? "CMS Admin Dashboard"
+              : x === "/CmsUsers"
+              ? "CMS User Dashboard"
+              : x === "/users"
+              ? "Users Dashboard"
+              : ""}
+          </li>
+          <li className={styles.nav__listitem} style={{ marginRight: "220px" }}>
+            <img
+              src="/avatar.png"
+              height="30"
+              style={{ marginRight: "10px" }}
+            />
+            Nama
+            <ul className={styles.nav__listitemdrop}>
+              <li>
+                <a onClick={logout}>Log Out</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
@@ -56,17 +57,44 @@ const Sidebar = () => {
           <Image src="/icon.png" width={180} height={87} />
         </div>
         <li>
-          <a onClick={(e) => router.push("../CmsAdmin")}>CMS_Admin</a>
+          <a
+            onClick={(e) => router.push("../CmsAdmin")}
+            className={
+              router.pathname === "/CmsAdmin"
+                ? styles.activeNav
+                : styles.nonactiveNav
+            }
+          >
+            CMS_Admin
+          </a>
         </li>
         <li>
-          <a onClick={(e) => router.push("../CmsUsers")}>CMS_User</a>
+          <a
+            onClick={(e) => router.push("../CmsUsers")}
+            className={
+              router.pathname === "/CmsUsers"
+                ? styles.activeNav
+                : styles.nonactiveNav
+            }
+          >
+            CMS_User
+          </a>
         </li>
         <li>
-          <a onClick={(e) => router.push("../users")}>user</a>
+          <a
+            onClick={(e) => router.push("../users")}
+            className={
+              router.pathname === "/users"
+                ? styles.activeNav
+                : styles.nonactiveNav
+            }
+          >
+            user
+          </a>
         </li>
         <br />
       </div>
-    </div>
+    </>
   );
 };
 

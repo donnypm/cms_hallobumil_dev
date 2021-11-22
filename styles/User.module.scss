@@ -1,9 +1,16 @@
 .center {
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  width: 500px;
   height: auto;
-  top: 30%;
+  top: 20%;
   left: 35%;
+}
+
+.avatarHome {
+  height: 300px;
+  width: 300px;
+  align-self: center;
 }
 
 .section {

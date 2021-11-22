@@ -95,7 +95,13 @@ const Register = () => {
                 </button>
               </div>
               <div>
-                <p style={{ textAlign: "center" }}>
+                <p
+                  style={{
+                    textAlign: "center",
+                    marginTop: "15px",
+                    fontFamily: "Comfortaa",
+                  }}
+                >
                   do you haven account? <a href="/">Login</a>
                 </p>
               </div>

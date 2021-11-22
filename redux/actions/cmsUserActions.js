@@ -1,7 +1,11 @@
-import { DELETE_CMSUSERS, GET_CMSUSERS, CMSUSERS_ERROR } from "../reducers/types";
+import {
+  DELETE_CMSUSERS,
+  GET_CMSUSERS,
+  CMSUSERS_ERROR,
+} from "../reducers/types";
 import axios from "axios";
 
-export const getCmsuser = () => async (dispatch) => {
+export const getCmsUser = () => async (dispatch) => {
   try {
     const res = await axios.get(`https://fakestoreapi.com/users`);
     dispatch({
@@ -17,7 +21,7 @@ export const getCmsuser = () => async (dispatch) => {
   }
 };
 
-export const deleteCmsuser = (id) => async (dispatch) => {
+export const deleteCmsUser = (id) => async (dispatch) => {
   try {
     await axios
       .delete(`https://fakestoreapi.com/users/${id}`)

@@ -14,22 +14,23 @@ import { useRouter } from "next/dist/client/router";
 import Cookie from "js-cookie";
 
 const Login = () => {
+  // VISIBLE OR NONVISIBLE PASSWORD
   const [passwordShown, setPasswordShown] = useState(false);
-
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const userData = useSelector((state) => state.isLogin);
   const { errors } = userData;
 
   const [isError, setIserror] = useState(false);
 
-  const dispatch = useDispatch();
-  const router = useRouter();
+  //INPUT FORM
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (Cookie.get("token")) {
@@ -112,10 +113,30 @@ const Login = () => {
                   Login
                 </button>
               </div>
+              {isError && (
+                <div style={{ textAlign: "center" }}>
+                  {errors &&
+                    errors.map((item, index) => (
+                      <p key={index} style={{ color: "red" }}>
+                        {item.msg}
+                      </p>
+                    ))}
+                </div>
+              )}
               <div>
-                <p style={{ textAlign: "center" }}>
+                <p
+                  style={{
+                    textAlign: "center",
+                    marginTop: "15px",
+                    fontFamily: "Comfortaa",
+                  }}
+                >
                   do you haven't account?{" "}
-                  <a href="/Register" style={{ fontWeight: "bold" }}>
+                  <a
+                    href="./Register"
+                    // onClick={(e) => router.push("./Register")}
+                    style={{ fontWeight: "bold" }}
+                  >
                     Register
                   </a>
                 </p>

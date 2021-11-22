@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import adminReducer from "./adminReducer";
-import cmsUserReducer from "./cmsUserReducer";
+import adminReducer from "./adminReducers";
+import cmsUserReducer from "./cmsUserReducers";
 import loginReducer from "./loginReducers";
 import userReducer from "./userReducer";
 

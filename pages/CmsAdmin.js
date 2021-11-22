@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/CmsAdmin.module.scss";
+import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
@@ -34,6 +35,16 @@ const CmsAdmin = () => {
     dispatch(getAdmin());
   }, []);
 
+  // SEARCH DATA
+  const [inputSearch, setInputSearch] = useState("");
+  const handleChangeSearch = (e) => {
+    e.preventDefault();
+    setInputSearch(e.target.value);
+  };
+
+  const userData = useSelector((state) => state.isLogin);
+  const { roleAccess } = userData;
+
   return (
     <>
       <Head>
@@ -43,7 +54,7 @@ const CmsAdmin = () => {
       <Layout />
 
       {/* MODAL CREATE ADMIN */}
-      <section className="modal-cont">
+      <section>
         <ModalAdmin
           isOpen={modalIsOpen}
           ariaHideApp={false}
@@ -55,7 +66,7 @@ const CmsAdmin = () => {
               bottom: "40px",
               backgroundColor: "rgba(245, 140, 139, 1)",
             },
-            overlay: { backgroundColor: "#C4C4C4" },
+            overlay: { backgroundColor: "rgba(196, 196, 196, 0.80)" },
           }}
         >
           <button
@@ -156,10 +167,43 @@ const CmsAdmin = () => {
         </ModalAdmin>
       </section>
 
-      <section className={styles.article}>
-        <h1 style={{ fontSize: "30px", fontFamily: "comfortaa", fontWeight: "bold"}}>
-          CMS Admin
-        </h1>
+      {/* MODAL DETAIL ADMIN  */}
+      <section>
+        <AdminDetail
+          isOpen={descModalIsOpen}
+          ariaHideApp={false}
+          style={{
+            content: {
+              top: "90px",
+              left: "230px",
+              right: "40px",
+              bottom: "40px",
+              backgroundColor: "rgba(245, 140, 139, 1)",
+            },
+            overlay: { backgroundColor: "rgba(196, 196, 196, 0.80)" },
+          }}
+        >
+          <button
+            onClick={() => setdescModalIsOpen(false)}
+            style={{ float: "right"}}
+            className={styles.btnAction}
+          >
+            <FontAwesomeIcon
+              icon={faWindowClose}
+              size="2x"
+              style={{ color: "black" }}
+            />
+          </button>
+        <section>
+          <div>
+            <h1>Detail CMS Admin</h1>
+            <p></p>
+          </div>
+        </section>
+        </AdminDetail>
+      </section>
+
+      <section className="article">
 
         <div className="header">
           <button className="btnCreate" onClick={() => setModalIsOpen(true)}>
@@ -171,17 +215,22 @@ const CmsAdmin = () => {
               <input
                 type="text"
                 placeholder="Search CMS Admin..."
-                //  onChange={}
-                // value={}
+                name={inputSearch}
+                onChange={handleChangeSearch}
+                value={inputSearch}
                 className="input-search"
               />
             </form>
           </div>
         </div>
 
+        {/* CONTENT */}
         <section className={styles.admin}>
           <div style={{ overflowX: "auto" }}>
-            <table class="table table-borderless" style={{ width: "1000px" }}>
+            <table
+              className="table table-borderless"
+              style={{ width: "1000px", marginTop: "10px" }}
+            >
               <thead>
                 <tr
                   style={{
@@ -200,58 +249,89 @@ const CmsAdmin = () => {
                   ? "Loading..."
                   : error
                   ? error.message
-                  : admins.map((a) => (
-                      <tr key={a.id}>
-                        <th scope="row">{a.id}</th>
-                        <td>{a.email}</td>
-                        <td>{a.username}</td>
-                        <td>{a.phone}</td>
-                        <td>
-                          <div className={styles.column}>
-                            {/* DETAIL  */}
-                            <button className={styles.btnAction}>
-                              <FontAwesomeIcon
-                                icon={faInfoCircle}
-                                size="1x"
-                                style={{ color: "black" }}
-                              />
-                            </button>
+                  : admins
+                      .filter((a) => {
+                        if (inputSearch === "") {
+                          return a;
+                        } else if (
+                          (a.username
+                            .toLowerCase()
+                            .includes(inputSearch.toLowerCase()),
+                          a.email
+                            .toLowerCase()
+                            .includes(inputSearch.toLowerCase()))
+                        ) {
+                          return a;
+                        }
+                      })
+                      .map((a) => (
+                        <tr key={a.id}>
+                          <th scope="row">{a.id}</th>
+                          <td>{a.email}</td>
+                          <td>{a.username}</td>
+                          <td>{a.phone}</td>
+                          <td>
+                            <div className={styles.column}>
+                              {/* DETAIL  */}
+                              <button className={styles.btnAction}>
+                                <FontAwesomeIcon
+                                  icon={faInfoCircle}
+                                  size="1x"
+                                  style={{ color: "black" }}
+                                />
+                              </button>
 
-                            {/* EDIT  */}
-                            <button className={styles.btnAction}>
-                              <FontAwesomeIcon
-                                icon={faPen}
-                                size="1x"
-                                style={{ color: "black" }}
-                              />
-                            </button>
-
-                            {/* DELETE  */}
-                            <button
-                              className={styles.btnAction}
-                              onClick={() =>
-                                dispatch(
-                                  deleteAdmin(u.id),
-                                  Swal.fire(
-                                    "Berhasil Menghapus!",
-                                    "Admin " +
-                                      u.username +
-                                      " Berhasil di Hapus!",
-                                    "success"
-                                  )
-                                )
-                              }
-                            >
-                              <FontAwesomeIcon
-                                icon={faTrash}
-                                size="1x"
-                                style={{ color: "black" }}
-                              />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
+                              {roleAccess === "Admin" ? (
+                                <>
+                                  {" "}
+                                  {/* EDIT  */}
+                                  <button className={styles.btnAction}>
+                                    <FontAwesomeIcon
+                                      icon={faPen}
+                                      size="1x"
+                                      style={{ color: "black" }}
+                                    />
+                                  </button>
+                                  {/* DELETE  */}
+                                  <button
+                                    className={styles.btnAction}
+                                    onClick={() =>
+                                      Swal.fire({
+                                        title: "Are you sure?",
+                                        text: "You won't be able to revert this!",
+                                        icon: "warning",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "#3085d6",
+                                        cancelButtonColor: "#d33",
+                                        confirmButtonText: "Yes, delete it!",
+                                      }).then((result) => {
+                                        if (result.isConfirmed) {
+                                          dispatch(
+                                            deleteAdmin(a.id),
+                                            Swal.fire(
+                                              "Deleted!",
+                                              "Your file has been deleted.",
+                                              "success"
+                                            )
+                                          );
+                                        }
+                                      })
+                                    }
+                                  >
+                                    <FontAwesomeIcon
+                                      icon={faTrash}
+                                      size="1x"
+                                      style={{ color: "black" }}
+                                    />
+                                  </button>{" "}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
               </tbody>
             </table>
           </div>

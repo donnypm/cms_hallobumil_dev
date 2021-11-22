@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/users.module.scss";
 import Image from "next/image";
-import { getUsers } from "../redux/actions/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
@@ -16,22 +15,28 @@ import Swal from "sweetalert2";
 import Head from "next/dist/shared/lib/head";
 import Layout from "./components/Layout";
 import { useDispatch, useSelector } from "react-redux";
-
+import { deleteUsers, getUsers } from "../redux/actions/userActions";
 
 (Modal, AdminDetail, EditAdmin).setAppElement();
 
 const Users = () => {
-
-  //Get Data
+  // Get Data
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.Users);
   const { loading, error, users } = allUsers;
 
-  //Load Data
+  // LOAD DATA
   useEffect(() => {
     dispatch(getUsers());
   }, []);
-  
+
+// SEARCH DATA
+  const [inputSearch, setInputSearch] = useState("");
+  const handleChangeSearch = (e) => {
+    e.preventDefault();
+    setInputSearch(e.target.value);
+  };
+
   return (
     <div>
       <Head>
@@ -41,29 +46,25 @@ const Users = () => {
       <Layout />
 
       <section className="article">
-        <h1 style={{ fontSize: "30px", fontFamily: "comfortaa", fontWeight: "bold"}}>
-          User
-        </h1>
 
         <div className={styles.header}>
           <div className={styles.search}>
             <form style={{ width: "500px" }}>
               <input
-                name="Search"
                 type="text"
                 placeholder="Search User..."
-                //  onChange={}
-                // value={}
+                name={inputSearch}
+                onChange={handleChangeSearch}
+                value={inputSearch}
                 className="input-search"
               />
             </form>
           </div>
         </div>
 
-        <section>
-          <section className={styles.users}>
+        <section className={styles.users}>
           <div style={{ overflowX: "auto" }}>
-            <table class="table table-borderless" style={{ width: "1000px" }}>
+            <table className="table table-borderless" style={{ width: "1000px" }}>
               <thead>
                 <tr
                   style={{
@@ -82,12 +83,27 @@ const Users = () => {
                   ? "Loading..."
                   : error
                   ? error.message
-                  : users.map((a) => (
-                      <tr key={a.id}>
-                        <th scope="row">{a.id}</th>
-                        <td>{a.email}</td>
-                        <td>{a.username}</td>
-                        <td>{a.phone}</td>
+                  : users
+                    .filter((u) => {
+                      if (inputSearch === "") {
+                        return u;
+                      } else if (
+                        (u.username
+                          .toLowerCase()
+                          .includes(inputSearch.toLowerCase()),
+                        u.email
+                        .toLowerCase()
+                        .includes(inputSearch.toLowerCase()))
+                      ) {
+                        return u;
+                      }
+                    })
+                    .map((u) => (
+                      <tr key={u.id}>
+                        <th scope="row">{u.id}</th>
+                        <td>{u.email}</td>
+                        <td>{u.username}</td>
+                        <td>{u.phone}</td>
                         <td>
                           <div className={styles.column}>
                             {/* DETAIL  */}
@@ -112,16 +128,26 @@ const Users = () => {
                             <button
                               className={styles.btnAction}
                               onClick={() =>
-                                dispatch(
-                                  deleteAdmin(u.id),
-                                  Swal.fire(
-                                    "Berhasil Menghapus!",
-                                    "Admin " +
-                                      u.username +
-                                      " Berhasil di Hapus!",
-                                    "success"
-                                  )
-                                )
+                                Swal.fire({
+                                  title: "Are you sure?",
+                                  text: "You won't be able to revert this!",
+                                  icon: "warning",
+                                  showCancelButton: true,
+                                  confirmButtonColor: "#3085d6",
+                                  cancelButtonColor: "#d33",
+                                  confirmButtonText: "Yes, delete it!",
+                                }).then((result) => {
+                                  if (result.isConfirmed) {
+                                    dispatch(
+                                      deleteUsers(u.id),
+                                      Swal.fire(
+                                        "Deleted!",
+                                        "Your file has been deleted.",
+                                        "success"
+                                      )
+                                    );
+                                  }
+                                })
                               }
                             >
                               <FontAwesomeIcon
@@ -138,7 +164,6 @@ const Users = () => {
             </table>
           </div>
         </section>
-      </section>
       </section>
     </div>
   );

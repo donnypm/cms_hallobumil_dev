@@ -3,6 +3,7 @@ import { LOGIN, LOGOUT, ERROR } from "./types";
 const initialState = {
   users: null,
   loading: true,
+  roleAccess: "Admin",
 };
 
 export default function loginReducer(state = initialState, action) {
