@@ -11,7 +11,6 @@ const Sidebar = () => {
   const router = useRouter();
 
   const x = router.pathname;
-  console.log("ini halaman " + x);
 
   const logout = () => {
     // e.preventDefault;
@@ -28,11 +27,11 @@ const Sidebar = () => {
         <ul className={styles.nav__list}>
           <li className={styles.nav__listlogo} style={{ fontSize: "24px" }}>
             {x === "/CmsAdmin"
-              ? "CMS Admin Dashboard"
+              ? "CMS Admin"
               : x === "/CmsUsers"
-              ? "CMS User Dashboard"
+              ? "CMS User"
               : x === "/users"
-              ? "Users Dashboard"
+              ? "Users"
               : ""}
           </li>
           <li className={styles.nav__listitem} style={{ marginRight: "220px" }}>

@@ -168,12 +168,16 @@ const CmsAdmin = () => {
       </section>
 
       <section className="article">
-        <h1 className="title-article">CMS Admin</h1>
+        {/* <h1 className="title-article">CMS Admin</h1> */}
 
         <div className="header">
-          <button className="btnCreate" onClick={() => setModalIsOpen(true)}>
-            New CMS Admin
-          </button>
+          {roleAccess === "Admin" ? (
+            <button className="btnCreate" onClick={() => setModalIsOpen(true)}>
+              New CMS Admin
+            </button>
+          ) : (
+            <></>
+          )}
 
           <div className="search">
             <form style={{ width: "500px" }}>
@@ -210,93 +214,97 @@ const CmsAdmin = () => {
                 </tr>
               </thead>
               <tbody>
-                {loading
-                  ? "Loading..."
-                  : error
-                  ? error.message
-                  : admins
-                      .filter((a) => {
-                        if (inputSearch === "") {
-                          return a;
-                        } else if (
-                          (a.username
-                            .toLowerCase()
-                            .includes(inputSearch.toLowerCase()),
-                          a.email
-                            .toLowerCase()
-                            .includes(inputSearch.toLowerCase()))
-                        ) {
-                          return a;
-                        }
-                      })
-                      .map((a) => (
-                        <tr key={a.id}>
-                          <th scope="row">{a.id}</th>
-                          <td>{a.email}</td>
-                          <td>{a.username}</td>
-                          <td>{a.phone}</td>
-                          <td>
-                            <div className={styles.column}>
-                              {/* DETAIL  */}
-                              <button className={styles.btnAction}>
-                                <FontAwesomeIcon
-                                  icon={faInfoCircle}
-                                  size="1x"
-                                  style={{ color: "black" }}
-                                />
-                              </button>
+                {loading ? (
+                  <tr>
+                    <td>Loading...</td>
+                  </tr>
+                ) : error ? (
+                  error.message
+                ) : (
+                  admins
+                    .filter((a) => {
+                      if (inputSearch === "") {
+                        return a;
+                      } else if (
+                        (a.username
+                          .toLowerCase()
+                          .includes(inputSearch.toLowerCase()),
+                        a.email
+                          .toLowerCase()
+                          .includes(inputSearch.toLowerCase()))
+                      ) {
+                        return a;
+                      }
+                    })
+                    .map((a) => (
+                      <tr key={a.id}>
+                        <th scope="row">{a.id}</th>
+                        <td>{a.email}</td>
+                        <td>{a.username}</td>
+                        <td>{a.phone}</td>
+                        <td>
+                          <div className={styles.column}>
+                            {/* DETAIL  */}
+                            <button className={styles.btnAction}>
+                              <FontAwesomeIcon
+                                icon={faInfoCircle}
+                                size="1x"
+                                style={{ color: "black" }}
+                              />
+                            </button>
 
-                              {roleAccess === "Admin" ? (
-                                <>
-                                  {" "}
-                                  {/* EDIT  */}
-                                  <button className={styles.btnAction}>
-                                    <FontAwesomeIcon
-                                      icon={faPen}
-                                      size="1x"
-                                      style={{ color: "black" }}
-                                    />
-                                  </button>
-                                  {/* DELETE  */}
-                                  <button
-                                    className={styles.btnAction}
-                                    onClick={() =>
-                                      Swal.fire({
-                                        title: "Are you sure?",
-                                        text: "You won't be able to revert this!",
-                                        icon: "warning",
-                                        showCancelButton: true,
-                                        confirmButtonColor: "#3085d6",
-                                        cancelButtonColor: "#d33",
-                                        confirmButtonText: "Yes, delete it!",
-                                      }).then((result) => {
-                                        if (result.isConfirmed) {
-                                          dispatch(
-                                            deleteAdmin(a.id),
-                                            Swal.fire(
-                                              "Deleted!",
-                                              "Your file has been deleted.",
-                                              "success"
-                                            )
-                                          );
-                                        }
-                                      })
-                                    }
-                                  >
-                                    <FontAwesomeIcon
-                                      icon={faTrash}
-                                      size="1x"
-                                      style={{ color: "black" }}
-                                    />
-                                  </button>{" "}
-                                </>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
+                            {roleAccess === "Admin" ? (
+                              <>
+                                {" "}
+                                {/* EDIT  */}
+                                <button className={styles.btnAction}>
+                                  <FontAwesomeIcon
+                                    icon={faPen}
+                                    size="1x"
+                                    style={{ color: "black" }}
+                                  />
+                                </button>
+                                {/* DELETE  */}
+                                <button
+                                  className={styles.btnAction}
+                                  onClick={() =>
+                                    Swal.fire({
+                                      title: "Are you sure?",
+                                      text: "You won't be able to revert this!",
+                                      icon: "warning",
+                                      showCancelButton: true,
+                                      confirmButtonColor: "#3085d6",
+                                      cancelButtonColor: "#d33",
+                                      confirmButtonText: "Yes, delete it!",
+                                    }).then((result) => {
+                                      if (result.isConfirmed) {
+                                        dispatch(
+                                          deleteAdmin(a.id),
+                                          Swal.fire(
+                                            "Deleted!",
+                                            "Your file has been deleted.",
+                                            "success"
+                                          )
+                                        );
+                                      }
+                                    })
+                                  }
+                                >
+                                  <FontAwesomeIcon
+                                    icon={faTrash}
+                                    size="1x"
+                                    style={{ color: "black" }}
+                                  />
+                                </button>{" "}
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                )}
               </tbody>
             </table>
           </div>

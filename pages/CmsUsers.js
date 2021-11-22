@@ -165,8 +165,6 @@ const CmsUsers = () => {
       </section>
 
       <section className="article">
-        <h1 className="title-article">CMS User</h1>
-
         <div className="header">
           <button className="btnCreate" onClick={() => setModalIsOpen(true)}>
             New CMS User
@@ -189,7 +187,7 @@ const CmsUsers = () => {
         <section className={styles.users}>
           <div style={{ overflowX: "auto" }}>
             <table
-              class="table table-borderless"
+              className="table table-borderless"
               style={{ width: "1000px", marginTop: "10px" }}
             >
               <thead>
@@ -206,87 +204,91 @@ const CmsUsers = () => {
                 </tr>
               </thead>
               <tbody>
-                {loading
-                  ? "Loading..."
-                  : error
-                  ? error.message
-                  : cmsUsers
-                      .filter((u) => {
-                        if (inputSearch === "") {
-                          return u;
-                        } else if (
-                          (u.username
-                            .toLowerCase()
-                            .includes(inputSearch.toLowerCase()),
-                          u.email
-                            .toLowerCase()
-                            .includes(inputSearch.toLowerCase()))
-                        ) {
-                          return u;
-                        }
-                      })
-                      .map((u) => (
-                        <tr key={u.id}>
-                          <th scope="row">{u.id}</th>
-                          <td>{u.email}</td>
-                          <td>{u.username}</td>
-                          <td>{u.phone}</td>
-                          <td>
-                            <div className={styles.column}>
-                              {/* DETAIL  */}
-                              <button className={styles.btnAction}>
-                                <FontAwesomeIcon
-                                  icon={faInfoCircle}
-                                  size="1x"
-                                  style={{ color: "black" }}
-                                />
-                              </button>
+                {loading ? (
+                  <tr>
+                    <td>Loading...</td>
+                  </tr>
+                ) : error ? (
+                  error.message
+                ) : (
+                  cmsUsers
+                    .filter((u) => {
+                      if (inputSearch === "") {
+                        return u;
+                      } else if (
+                        (u.username
+                          .toLowerCase()
+                          .includes(inputSearch.toLowerCase()),
+                        u.email
+                          .toLowerCase()
+                          .includes(inputSearch.toLowerCase()))
+                      ) {
+                        return u;
+                      }
+                    })
+                    .map((u) => (
+                      <tr key={u.id}>
+                        <th scope="row">{u.id}</th>
+                        <td>{u.email}</td>
+                        <td>{u.username}</td>
+                        <td>{u.phone}</td>
+                        <td>
+                          <div className={styles.column}>
+                            {/* DETAIL  */}
+                            <button className={styles.btnAction}>
+                              <FontAwesomeIcon
+                                icon={faInfoCircle}
+                                size="1x"
+                                style={{ color: "black" }}
+                              />
+                            </button>
 
-                              {/* EDIT  */}
-                              <button className={styles.btnAction}>
-                                <FontAwesomeIcon
-                                  icon={faPen}
-                                  size="1x"
-                                  style={{ color: "black" }}
-                                />
-                              </button>
+                            {/* EDIT  */}
+                            <button className={styles.btnAction}>
+                              <FontAwesomeIcon
+                                icon={faPen}
+                                size="1x"
+                                style={{ color: "black" }}
+                              />
+                            </button>
 
-                              {/* DELETE  */}
-                              <button
-                                className={styles.btnAction}
-                                onClick={() =>
-                                  Swal.fire({
-                                    title: "Are you sure?",
-                                    text: "You won't be able to revert this!",
-                                    icon: "warning",
-                                    showCancelButton: true,
-                                    confirmButtonColor: "#3085d6",
-                                    cancelButtonColor: "#d33",
-                                    confirmButtonText: "Yes, delete it!",
-                                  }).then((result) => {
-                                    if (result.isConfirmed) {
-                                      dispatch(
-                                        deleteCmsUser(u.id),
-                                        Swal.fire(
-                                          "Deleted!",
-                                          "Your file has been deleted.",
-                                          "success"
-                                        )
-                                      );
-                                    }
-                                  })
-                                }
-                              >
-                                <FontAwesomeIcon
-                                  icon={faTrash}
-                                  size="1x"
-                                  style={{ color: "black" }}
-                                />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
+                            {/* DELETE  */}
+                            <button
+                              className={styles.btnAction}
+                              onClick={() =>
+                                Swal.fire({
+                                  title: "Are you sure?",
+                                  text: "You won't be able to revert this!",
+                                  icon: "warning",
+                                  showCancelButton: true,
+                                  confirmButtonColor: "#3085d6",
+                                  cancelButtonColor: "#d33",
+                                  confirmButtonText: "Yes, delete it!",
+                                }).then((result) => {
+                                  if (result.isConfirmed) {
+                                    dispatch(
+                                      deleteCmsUser(u.id),
+                                      Swal.fire(
+                                        "Deleted!",
+                                        "Your file has been deleted.",
+                                        "success"
+                                      )
+                                    );
+                                  }
+                                })
+                              }
+                            >
+                              <FontAwesomeIcon
+                                icon={faTrash}
+                                size="1x"
+                                style={{ color: "black" }}
+                              />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                )}
               </tbody>
             </table>
           </div>

@@ -30,6 +30,13 @@ const Users = () => {
     dispatch(getUsers());
   }, []);
 
+  // SEARCH DATA
+  const [inputSearch, setInputSearch] = useState("");
+  const handleChangeSearch = (e) => {
+    e.preventDefault();
+    setInputSearch(e.target.value);
+  };
+
   return (
     <div>
       <Head>
@@ -39,8 +46,6 @@ const Users = () => {
       <Layout />
 
       <section className="article">
-        <h1 className="title-article"> User </h1>
-
         <div className={styles.header}>
           <div className={styles.search}>
             <form style={{ width: "500px" }}>
@@ -48,8 +53,9 @@ const Users = () => {
                 name="Search"
                 type="text"
                 placeholder="Search User..."
-                //  onChange={}
-                // value={}
+                name={inputSearch}
+                onChange={handleChangeSearch}
+                value={inputSearch}
                 className="input-search"
               />
             </form>
@@ -58,7 +64,10 @@ const Users = () => {
 
         <section className={styles.users}>
           <div style={{ overflowX: "auto" }}>
-            <table class="table table-borderless" style={{ width: "1000px" }}>
+            <table
+              className="table table-borderless"
+              style={{ width: "1000px" }}
+            >
               <thead>
                 <tr
                   style={{
@@ -73,11 +82,29 @@ const Users = () => {
                 </tr>
               </thead>
               <tbody>
-                {loading
-                  ? "Loading..."
-                  : error
-                  ? error.message
-                  : users.map((u) => (
+                {loading ? (
+                  <tr>
+                    <td>Loading...</td>
+                  </tr>
+                ) : error ? (
+                  error.message
+                ) : (
+                  users
+                    .filter((u) => {
+                      if (inputSearch === "") {
+                        return u;
+                      } else if (
+                        (u.username
+                          .toLowerCase()
+                          .includes(inputSearch.toLowerCase()),
+                        u.email
+                          .toLowerCase()
+                          .includes(inputSearch.toLowerCase()))
+                      ) {
+                        return u;
+                      }
+                    })
+                    .map((u) => (
                       <tr key={u.id}>
                         <th scope="row">{u.id}</th>
                         <td>{u.email}</td>
@@ -138,7 +165,8 @@ const Users = () => {
                           </div>
                         </td>
                       </tr>
-                    ))}
+                    ))
+                )}
               </tbody>
             </table>
           </div>
